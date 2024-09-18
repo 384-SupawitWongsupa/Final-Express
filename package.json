@@ -10,7 +10,7 @@
     "serve:watch": "nodemon dist/index.js",
     "build": "tsc",
     "build:watch": "tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
@@ -19,12 +19,20 @@
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
     "express": "^4.20.0",
-    "mysql2": "^3.11.1"
+    "mysql2": "^3.11.1",
+    "supertest": "^7.0.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-typescript": "^7.24.7",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.13",
     "@types/node": "^22.5.4",
+    "babel-jest": "^29.7.0",
     "concurrently": "^9.0.0",
-    "nodemon": "^3.1.4"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.2"
   }
 }
