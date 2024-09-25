@@ -1,19 +1,13 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const product_1 = require("../db/product");
+const product_1 = __importDefault(require("../db/product"));
 // Handler to get all products
-const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAll = async (req, res) => {
     try {
-        const products = yield product_1.default.selectAll();
+        const products = await product_1.default.selectAll();
         res.status(200).send({
             message: "OK",
             result: products,
@@ -26,9 +20,9 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             error: err.message || "Unknown error", // Ensure error.message is used safely
         });
     }
-});
+};
 // Handler to delete a product by ID
-const deleteById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteById = async (req, res) => {
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
         return res.status(400).send({
@@ -36,7 +30,7 @@ const deleteById = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
     try {
-        yield product_1.default.deleteProductById(id);
+        await product_1.default.deleteProductById(id);
         res.status(200).send({
             message: "OK",
             result: `Product with ID ${id} deleted successfully`,
@@ -49,9 +43,9 @@ const deleteById = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             error: err.message || "Unknown error", // Ensure error.message is used safely
         });
     }
-});
+};
 // Handler to insert a new product
-const insertProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const insertProduct = async (req, res) => {
     const { id, name, price } = req.body;
     // Basic validation
     if (typeof id !== "number" ||
@@ -62,7 +56,7 @@ const insertProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
     try {
-        yield product_1.default.insertProduct(id, name, price);
+        await product_1.default.insertProduct(id, name, price);
         res.status(201).send({
             message: "Product created successfully",
         });
@@ -74,9 +68,9 @@ const insertProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             error: err.message || "Unknown error", // Ensure error.message is used safely
         });
     }
-});
+};
 // Handler to update an existing product by ID
-const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateProduct = async (req, res) => {
     const id = parseInt(req.params.id, 10);
     const { name, price } = req.body;
     // Basic validation
@@ -86,7 +80,7 @@ const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
     try {
-        yield product_1.default.updateProduct(id, name, price);
+        await product_1.default.updateProduct(id, name, price);
         res.status(200).send({
             message: `Product with ID ${id} updated successfully`,
         });
@@ -98,5 +92,6 @@ const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             error: err.message || "Unknown error", // Ensure error.message is used safely
         });
     }
-});
+};
 exports.default = { getAll, deleteById, insertProduct, updateProduct };
+//# sourceMappingURL=product.controller.js.map

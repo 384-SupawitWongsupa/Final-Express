@@ -1,4 +1,4 @@
-import * as express from "express";
+import express from "express";
 import * as bodyParser from "body-parser";
 import routes from "./routes";
 
@@ -18,5 +18,34 @@ app.use((err: any, req: any, res: any, next: any) => {
     error: err.message || "Unknown error",
   });
 });
+
+app.get("/", (req, res) => {
+  const user = {
+    firstName: "พีระพัฒน์",
+    lastName: "มิคะนุช",
+    id: "6604101361"
+  };
+  res.json(user);
+});
+
+app.put("/books", (req, res) => {
+  const { nickname } = req.body;
+
+  // Logic to update a book would go here
+  res.json({
+    message: "User updated to nickname",
+    nickname
+  });
+});
+
+app.delete("/books/:id", (req, res) => {
+  const { id } = req.params;
+
+  // Logic to delete a book by ID would go here
+  res.json({
+    message: `Book with id ${id} has been deleted`
+  });
+});
+
 
 export default app;
