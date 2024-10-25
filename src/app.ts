@@ -21,9 +21,9 @@ app.use((err: any, req: any, res: any, next: any) => {
 
 app.get("/", (req, res) => {
   const user = {
-    firstName: "พีระพัฒน์",
-    lastName: "มิคะนุช",
-    id: "6604101361"
+    firstName: "ศุปวิทย์",
+    lastName: "วงศ์สุภา",
+    id: "6604101384"
   };
   res.json(user);
 });
